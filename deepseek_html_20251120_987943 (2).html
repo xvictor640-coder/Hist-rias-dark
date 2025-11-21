@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@histórias_dark - Roteiros Perfeitos para TikTok</title>
+    <style>
+        :root {
+            --primary: #8a2be2;
+            --primary-dark: #6a1cb3;
+            --secondary: #ff4081;
+            --dark: #121212;
+            --darker: #0a0a0a;
+            --light: #e0e0e0;
+            --gray: #333333;
+            --gray-light: #444444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--darker);
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+        
+        .logo-icon {
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+        
+        .creator {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-top: 5px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .cta-button {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(138, 43, 226, 0.4);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: #ccc;
+        }
+        
+        /* Generator Section */
+        .generator {
+            padding: 60px 0;
+            background-color: var(--darker);
+        }
+        
+        .generator-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid var(--gray);
+            background-color: var(--dark);
+            color: var(--light);
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .generate-btn {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            width: 100%;
+        }
+        
+        .generate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(138, 43, 226, 0.4);
+        }
+        
+        .generate-btn:disabled {
+            background: var(--gray);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        /* Loading Animation */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(138, 43, 226, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+            margin: 0 auto 15px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Result Section */
+        .result {
+            padding: 60px 0;
+            display: none;
+        }
+        
+        .result.active {
+            display: block;
+        }
+        
+        .script-container {
+            background-color: var(--darker);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+        }
+        
+        .script-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .script-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .copy-btn {
+            background-color: var(--gray);
+            color: var(--light);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background-color: var(--gray-light);
+        }
+        
+        .script-content {
+            line-height: 1.8;
+            white-space: pre-line;
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 8px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        
+        .upgrade-prompt {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .upgrade-prompt h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .upgrade-prompt p {
+            margin-bottom: 20px;
+            color: #e0e0e0;
+        }
+        
+        /* Plans Section */
+        .plans {
+            padding: 80px 0;
+            background-color: var(--darker);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .section-title p {
+            color: #aaa;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .plans-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .plan-card {
+            background-color: var(--dark);
+            border-radius: 10px;
+            padding: 40px 30px;
+            width: 100%;
+            max-width: 350px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .plan-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .plan-card.free {
+            border: 2px solid var(--gray);
+        }
+        
+        .plan-card.premium {
+            border: 2px solid var(--primary);
+            transform: scale(1.05);
+        }
+        
+        .plan-card.premium:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+        
+        .plan-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 8px 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-bottom-left-radius: 10px;
+        }
+        
+        .plan-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .plan-name {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .plan-price.free {
+            color: var(--light);
+        }
+        
+        .plan-price.premium {
+            color: var(--primary);
+        }
+        
+        .plan-period {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        .plan-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .plan-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .plan-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-icon {
+            color: var(--primary);
+        }
+        
+        .feature-disabled {
+            color: #666;
+        }
+        
+        .feature-disabled .feature-icon {
+            color: #666;
+        }
+        
+        .plan-button {
+            display: block;
+            text-align: center;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .plan-button.free {
+            background-color: var(--gray);
+            color: var(--light);
+        }
+        
+        .plan-button.free:hover {
+            background-color: var(--gray-light);
+        }
+        
+        .plan-button.premium {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+        }
+        
+        .plan-button.premium:hover {
+            background: linear-gradient(to right, var(--primary-dark), var(--primary));
+        }
+        
+        /* Payment Modal */
+        .payment-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .payment-modal.active {
+            display: flex;
+        }
+        
+        .payment-content {
+            background-color: var(--darker);
+            border-radius: 10px;
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .payment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .payment-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .payment-option {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border: 1px solid var(--gray);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+        
+        .payment-option:hover {
+            border-color: var(--primary);
+            background-color: rgba(138, 43, 226, 0.1);
+        }
+        
+        .payment-option.selected {
+            border-color: var(--primary);
+            background-color: rgba(138, 43, 226, 0.2);
+        }
+        
+        .payment-icon {
+            font-size: 1.5rem;
+        }
+        
+        .payment-details {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+        }
+        
+        .payment-details.active {
+            display: block;
+        }
+        
+        .payment-summary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .payment-summary h3 {
+            margin-bottom: 10px;
+        }
+        
+        .payment-summary .price {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        
+        .confirm-payment {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .confirm-payment:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(138, 43, 226, 0.4);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--darker);
+            padding: 40px 0 20px;
+            border-top: 1px solid var(--gray);
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--gray);
+            border-radius: 50%;
+            color: var(--light);
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--gray);
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .plan-card.premium {
+                transform: scale(1);
+            }
+            
+            .plan-card.premium:hover {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">📖</span>
+                    <div>
+                        <h1>@histórias_dark</h1>
+                        <div class="creator">por Guxtavo Xavier</div>
+                    </div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#generator">Gerador</a></li>
+                        <li><a href="#plans">Planos</a></li>
+                        <li><a href="#contact">Contato</a></li>
+                    </ul>
+                </nav>
+                <a href="#plans" class="cta-button">Experimente Grátis</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>Roteiros Perfeitos para suas Histórias no TikTok</h2>
+            <p>Descreva exatamente o que você quer na sua história e receba um roteiro personalizado para criar conteúdos virais!</p>
+            <a href="#generator" class="cta-button">Criar Meu Roteiro</a>
+        </div>
+    </section>
+
+    <!-- Generator Section -->
+    <section class="generator" id="generator">
+        <div class="container">
+            <div class="generator-container">
+                <div class="form-group">
+                    <label for="storyType">Gênero da História</label>
+                    <select id="storyType">
+                        <option value="terror">Terror</option>
+                        <option value="romance">Romance</option>
+                        <option value="comedia">Comédia</option>
+                        <option value="drama">Drama</option>
+                        <option value="suspense">Suspense</option>
+                        <option value="fantasia">Fantasia</option>
+                        <option value="aventura">Aventura</option>
+                        <option value="misterio">Mistério</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="storyDescription">Descreva sua história em detalhes</label>
+                    <textarea id="storyDescription" placeholder="Ex: Quero uma história de terror sobre um fantasma que assombra uma casa antiga. A nova família que se mudou para lá descobre um diário com segredos sombrios do antigo morador. Inclua reviravoltas inesperadas e um final chocante..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="storyCharacters">Personagens principais (opcional)</label>
+                    <input type="text" id="storyCharacters" placeholder="Ex: João (protagonista), Maria (amiga), Fantasma (antagonista)">
+                </div>
+                
+                <div class="form-group">
+                    <label for="storyTone">Tom da história</label>
+                    <select id="storyTone">
+                        <option value="sombrio">Sombrio e intenso</option>
+                        <option value="leve">Leve e divertido</option>
+                        <option value="dramatico">Dramático e emocional</option>
+                        <option value="misterioso">Misterioso e intrigante</option>
+                        <option value="epico">Épico e grandioso</option>
+                    </select>
+                </div>
+                
+                <button class="generate-btn" id="generateBtn">Gerar Roteiro Personalizado</button>
+                
+                <div class="loading" id="loadingIndicator">
+                    <div class="loading-spinner"></div>
+                    <p>Criando seu roteiro personalizado...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Result Section -->
+    <section class="result" id="result">
+        <div class="container">
+            <div class="script-container">
+                <div class="script-header">
+                    <h3 class="script-title">Seu Roteiro Personalizado</h3>
+                    <button class="copy-btn" id="copyBtn">Copiar Roteiro</button>
+                </div>
+                <div class="script-content" id="scriptContent">
+                    <!-- O roteiro gerado aparecerá aqui -->
+                </div>
+            </div>
+            
+            <div class="upgrade-prompt">
+                <h3>Quer levar seus conteúdos para o próximo nível?</h3>
+                <p>Com o plano Premium, você terá acesso a gerador de falas com vários tipos de vozes e criação de vídeos por IA!</p>
+                <a href="#plans" class="cta-button">Conhecer Planos Premium</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plans Section -->
+    <section class="plans" id="plans">
+        <div class="container">
+            <div class="section-title">
+                <h2>Escolha Seu Plano</h2>
+                <p>Selecione o plano ideal para suas necessidades de criação de conteúdo</p>
+            </div>
+            
+            <div class="plans-container">
+                <div class="plan-card free">
+                    <div class="plan-header">
+                        <h3 class="plan-name">Grátis</h3>
+                        <div class="plan-price free">R$ 0</div>
+                        <div class="plan-period">para sempre</div>
+                    </div>
+                    
+                    <ul class="plan-features">
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span>Até 5 roteiros por mês</span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span>Roteiros personalizados</span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span>Exportação de texto</span>
+                        </li>
+                        <li class="feature-disabled">
+                            <span class="feature-icon">✗</span>
+                            <span>Gerador de vozes por IA</span>
+                        </li>
+                        <li class="feature-disabled">
+                            <span class="feature-icon">✗</span>
+                            <span>Criação de vídeos por IA</span>
+                        </li>
+                        <li class="feature-disabled">
+                            <span class="feature-icon">✗</span>
+                            <span>Suporte prioritário</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="#generator" class="plan-button free">Usar Plano Grátis</a>
+                </div>
+                
+                <div class="plan-card premium">
+                    <div class="plan-badge">MAIS POPULAR</div>
+                    <div class="plan-header">
+                        <h3 class="plan-name">Premium</h3>
+                        <div class="plan-price premium">R$ 35</div>
+                        <div class="plan-period">por mês</div>
+                    </div>
+                    
+                    <ul class="plan-features">
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span>Roteiros ilimitados</span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span>Todos os gêneros de histórias</span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span>Exportação de texto</span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span>Gerador de vozes por IA</span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span>Criação de vídeos por IA</span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span>Suporte prioritário</span>
+                        </li>
+                    </ul>
+                    
+                    <button class="plan-button premium" id="openPaymentModal">Comprar Agora</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Modal -->
+    <div class="payment-modal" id="paymentModal">
+        <div class="payment-content">
+            <div class="payment-header">
+                <h3 class="payment-title">Finalizar Compra</h3>
+                <button class="close-modal" id="closeModal">×</button>
+            </div>
+            
+            <div class="payment-summary">
+                <h3>Plano Premium</h3>
+                <div class="price">R$ 35,00/mês</div>
+            </div>
+            
+            <div class="payment-options">
+                <div class="payment-option" data-method="credit">
+                    <div class="payment-icon">💳</div>
+                    <div>
+                        <h4>Cartão de Crédito</h4>
+                        <p>Parcelamento em até 12x</p>
+                    </div>
+                </div>
+                
+                <div class="payment-option" data-method="debit">
+                    <div class="payment-icon">💳</div>
+                    <div>
+                        <h4>Cartão de Débito</h4>
+                        <p>Pagamento à vista</p>
+                    </div>
+                </div>
+                
+                <div class="payment-option" data-method="pix">
+                    <div class="payment-icon">📱</div>
+                    <div>
+                        <h4>PIX</h4>
+                        <p>Pagamento instantâneo</p>
+                    </div>
+                </div>
+                
+                <div class="payment-option" data-method="boleto">
+                    <div class="payment-icon">📄</div>
+                    <div>
+                        <h4>Boleto Bancário</h4>
+                        <p>Pagamento em até 3 dias úteis</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="payment-details" id="paymentDetails">
+                <!-- Detalhes do pagamento serão inseridos aqui -->
+            </div>
+            
+            <button class="confirm-payment" id="confirmPayment">Finalizar Pagamento</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>@histórias_dark</h3>
+                    <p>Criamos roteiros perfeitos para suas histórias no TikTok, usando inteligência artificial para potencializar seu conteúdo.</p>
+                    <p><strong>Criador: Guxtavo Xavier</strong></p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon">📘</a>
+                        <a href="#" class="social-icon">📷</a>
+                        <a href="#" class="social-icon">🐦</a>
+                        <a href="#" class="social-icon">📺</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#generator">Gerador de Roteiros</a></li>
+                        <li><a href="#plans">Planos</a></li>
+                        <li><a href="#contact">Contato</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Suporte</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Central de Ajuda</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="https://wa.me/5551989166847" target="_blank">Fale Conosco</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 @histórias_dark por Guxtavo Xavier. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Elementos DOM
+        const generateBtn = document.getElementById('generateBtn');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const resultSection = document.getElementById('result');
+        const scriptContent = document.getElementById('scriptContent');
+        const copyBtn = document.getElementById('copyBtn');
+        const paymentModal = document.getElementById('paymentModal');
+        const openPaymentModalBtn = document.getElementById('openPaymentModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        const paymentOptions = document.querySelectorAll('.payment-option');
+        const paymentDetails = document.getElementById('paymentDetails');
+        const confirmPaymentBtn = document.getElementById('confirmPayment');
+        
+        let selectedPaymentMethod = '';
+        
+        // Gerar roteiro
+        generateBtn.addEventListener('click', generateScript);
+        
+        function generateScript() {
+            const storyType = document.getElementById('storyType').value;
+            const description = document.getElementById('storyDescription').value;
+            const characters = document.getElementById('storyCharacters').value;
+            const tone = document.getElementById('storyTone').value;
+            
+            if (!description.trim()) {
+                alert('Por favor, descreva sua história para que possamos criar um roteiro personalizado.');
+                return;
+            }
+            
+            // Mostrar indicador de carregamento
+            generateBtn.disabled = true;
+            loadingIndicator.style.display = 'block';
+            
+            // Simular tempo de processamento (em um sistema real, seria uma chamada API)
+            setTimeout(() => {
+                // Gerar roteiro personalizado
+                const script = generatePersonalizedScript(storyType, description, characters, tone);
+                
+                scriptContent.textContent = script;
+                resultSection.classList.add('active');
+                loadingIndicator.style.display = 'none';
+                generateBtn.disabled = false;
+                
+                // Rolar até a seção de resultado
+                resultSection.scrollIntoView({ behavior: 'smooth' });
+            }, 2000);
+        }
+        
+        function generatePersonalizedScript(type, description, characters, tone) {
+            // Base para diferentes tipos de histórias
+            const templates = {
+                terror: {
+                    intro: [
+                        "Prepare-se para arrepiar! Sua história de terror personalizada está pronta:",
+                        "Aqui está seu roteiro de terror sob medida, criado especialmente para você:",
+                        "Sua história de terror personalizada, perfeita para assustar seus seguidores:"
+                    ],
+                    structure: [
+                        "[INTRODUÇÃO - 0-5s]\n- Cena: {intro_scene}\n- Legenda: {intro_caption}",
+                        "[DESENVOLVIMENTO - 5-20s]\n- Cena: {development_scene}\n- Legenda: {development_caption}\n- Cena: {development_scene2}\n- Legenda: {development_caption2}",
+                        "[CLÍMAX - 20-28s]\n- Cena: {climax_scene}\n- Legenda: {climax_caption}\n- Efeito sonoro: {sound_effect}",
+                        "[FINAL - 28-30s]\n- Cena: {final_scene}\n- Legenda: {final_caption}\n- Chamada: {call_to_action}"
+                    ]
+                },
+                romance: {
+                    intro: [
+                        "Sua história romântica personalizada, perfeita para emocionar:",
+                        "Aqui está seu roteiro de romance sob medida, créado com todo o cuidado:",
+                        "Prepare-se para emocionar! Sua história de romance personalizada:"
+                    ],
+                    structure: [
+                        "[ENCONTRO - 0-8s]\n- Cena: {meeting_scene}\n- Legenda: {meeting_caption}",
+                        "[CONEXÃO - 8-20s]\n- Cena: {connection_scene}\n- Legenda: {connection_caption}\n- Cena: {connection_scene2}\n- Legenda: {connection_caption2}",
+                        "[CONFLITO - 20-25s]\n- Cena: {conflict_scene}\n- Legenda: {conflict_caption}",
+                        "[RESOLUÇÃO - 25-30s]\n- Cena: {resolution_scene}\n- Legenda: {resolution_caption}\n- Chamada: {call_to_action}"
+                    ]
+                },
+                comedia: {
+                    intro: [
+                        "Risadas garantidas! Sua comédia personalizada está pronta:",
+                        "Aqui está seu roteiro de comédia sob medida, criado para fazer rir:",
+                        "Prepare-se para divertir! Sua história cômica personalizada:"
+                    ],
+                    structure: [
+                        "[SITUAÇÃO INICIAL - 0-5s]\n- Cena: {setup_scene}\n- Legenda: {setup_caption}",
+                        "[COMPLICAÇÕES - 5-18s]\n- Cena: {complication_scene}\n- Legenda: {complication_caption}\n- Cena: {complication_scene2}\n- Legenda: {complication_caption2}",
+                        "[PIADA PRINCIPAL - 18-25s]\n- Cena: {punchline_scene}\n- Legenda: {punchline_caption}\n- Efeito: {comedy_effect}",
+                        "[FINAL ENGRAÇADO - 25-30s]\n- Cena: {final_scene}\n- Legenda: {final_caption}\n- Chamada: {call_to_action}"
+                    ]
+                }
+            };
+            
+            // Selecionar template baseado no tipo
+            const template = templates[type] || templates.terror;
+            const intro = template.intro[Math.floor(Math.random() * template.intro.length)];
+            
+            // Gerar conteúdo baseado na descrição do usuário
+            const userKeywords = extractKeywords(description);
+            const characterList = characters ? characters.split(',').map(c => c.trim()) : ['Protagonista', 'Personagem Secundário'];
+            
+            // Construir o roteiro
+            let script = `${intro}\n\n`;
+            script += `Título: ${generateTitle(type, userKeywords)}\n\n`;
+            
+            if (characters) {
+                script += `Personagens: ${characters}\n\n`;
+            }
+            
+            // Adicionar estrutura do roteiro
+            template.structure.forEach(section => {
+                script += `${fillTemplate(section, type, userKeywords, characterList, tone)}\n\n`;
+            });
+            
+            // Adicionar dicas extras
+            script += `DICAS EXTRAS PARA ${type.toUpperCase()}:\n`;
+            script += generateTips(type, tone);
+            
+            return script;
+        }
+        
+        function extractKeywords(description) {
+            // Extrair palavras-chave da descrição do usuário
+            const words = description.toLowerCase().split(/\s+/);
+            const stopWords = ['que', 'para', 'com', 'uma', 'um', 'de', 'da', 'do', 'em', 'no', 'na'];
+            return words.filter(word => 
+                word.length > 3 && !stopWords.includes(word) && /[a-z]/.test(word)
+            ).slice(0, 5);
+        }
+        
+        function generateTitle(type, keywords) {
+            const titles = {
+                terror: [
+                    `O ${keywords[0] || 'Segredo'} Sombrio`,
+                    `Pesadelo ${keywords[0] || 'Noturno'}`,
+                    `A Maldição do ${keywords[0] || 'Passado'}`,
+                    `${keywords[0] ? keywords[0].charAt(0).toUpperCase() + keywords[0].slice(1) : 'Assombração'} Oculta`
+                ],
+                romance: [
+                    `Encontro ${keywords[0] || 'Inesperado'}`,
+                    `Destino ${keywords[0] || 'Cruzado'}`,
+                    `O ${keywords[0] || 'Amor'} que Mudou Tudo`,
+                    `${keywords[0] ? keywords[0].charAt(0).toUpperCase() + keywords[0].slice(1) : 'Corações'} Entrelaçados`
+                ],
+                comedia: [
+                    `O Dia do ${keywords[0] || 'Desastre'}`,
+                    `Confusão ${keywords[0] || 'Generalizada'}`,
+                    `A Grande ${keywords[0] || 'Aventura'}`,
+                    `${keywords[0] ? keywords[0].charAt(0).toUpperCase() + keywords[0].slice(1) : 'Situação'} Engraçada`
+                ]
+            };
+            
+            const typeTitles = titles[type] || titles.terror;
+            return typeTitles[Math.floor(Math.random() * typeTitles.length)];
+        }
+        
+        function fillTemplate(template, type, keywords, characters, tone) {
+            // Preencher o template com conteúdo gerado
+            let filled = template;
+            
+            // Cenas baseadas no tipo e tom
+            const scenes = generateScenes(type, tone, keywords, characters);
+            
+            // Substituir placeholders
+            Object.keys(scenes).forEach(key => {
+                filled = filled.replace(`{${key}}`, scenes[key]);
+            });
+            
+            return filled;
+        }
+        
+        function generateScenes(type, tone, keywords, characters) {
+            // Gerar cenas baseadas no tipo e tom
+            const scenes = {};
+            
+            if (type === 'terror') {
+                scenes.intro_scene = `Close no rosto de ${characters[0]} com expressão de medo`;
+                scenes.intro_caption = `"Eu nunca acreditei em ${keywords[0] || 'fantasmas'}... até agora"`;
+                scenes.development_scene = `Mostrar ambiente escuro, sombras se movendo`;
+                scenes.development_caption = `"${keywords[1] || 'Barulhos'} estranhos à noite, ${keywords[2] || 'portas'} batendo sozinhas"`;
+                scenes.development_scene2 = `${characters[0]} investigando os sons`;
+                scenes.development_caption2 = `"Decidi investigar... foi o maior erro da minha vida"`;
+                scenes.climax_scene = `Revelação do ${keywords[3] || 'perigo'} - algo inesperado`;
+                scenes.climax_caption = `"O que eu encontrei não era um ${keywords[0] || 'fantasma'}, era algo MUITO pior"`;
+                scenes.sound_effect = `Batida forte + grito`;
+                scenes.final_scene = `Expressão de choque, respiração ofegante`;
+                scenes.final_caption = `"Agora estou preso aqui... com ELE"`;
+                scenes.call_to_action = `"Compartilhe se você teria coragem de investigar!"`;
+            }
+            else if (type === 'romance') {
+                scenes.meeting_scene = `${characters[0]} caminhando distraído`;
+                scenes.meeting_caption = `"Eu achava que era só mais um dia comum..."`;
+                scenes.connection_scene = `Encontro acidental com ${characters[1] || 'a pessoa'}`;
+                scenes.connection_caption = `"Até que nossos olhos se encontraram ${keywords[0] || 'no metrô'}"`;
+                scenes.connection_scene2 = `Sequência de encontros "casuais"`;
+                scenes.connection_caption2 = `"O destino parecia insistir em nos aproximar"`;
+                scenes.conflict_scene = `Momento de ${keywords[1] || 'dúvida'} emocional`;
+                scenes.conflict_caption = `"E quando finalmente me declarei... a resposta me ${keywords[2] || 'surpreendeu'}"`;
+                scenes.resolution_scene = `${characters[0]} e ${characters[1] || 'a pessoa'} felizes, sorrindo`;
+                scenes.resolution_caption = `"Às vezes o ${keywords[3] || 'amor'} encontra você quando menos espera"`;
+                scenes.call_to_action = `"Compartilhe sua história de amor inesperado!"`;
+            }
+            else if (type === 'comedia') {
+                scenes.setup_scene = `${characters[0]} em situação ${keywords[0] || 'engraçada'}`;
+                scenes.setup_caption = `"Quando pensei que meu dia não poderia piorar..."`;
+                scenes.complication_scene = `Primeira trapalhada`;
+                scenes.complication_caption = `"${keywords[1] ? keywords[1].charAt(0).toUpperCase() + keywords[1].slice(1) : 'Esqueci'} as chaves, derramei café, peguei o ônibus errado"`;
+                scenes.complication_scene2 = `Reações exageradas a cada problema`;
+                scenes.complication_caption2 = `"E aí descobri que era dia de ${keywords[2] || 'apresentação importante'}!"`;
+                scenes.punchline_scene = `Situação ${keywords[3] || 'embaraçosa'} mas engraçada`;
+                scenes.punchline_caption = `"Entrei correndo na sala... e todo mundo me olhou"`;
+                scenes.comedy_effect = `Som de risada`;
+                scenes.final_scene = `${characters[0]} rindo da situação`;
+                scenes.final_caption = `"Moral da história: ria dos seus problemas!"`;
+                scenes.call_to_action = `"Comente seu dia mais caótico!"`;
+            }
+            
+            return scenes;
+        }
+        
+        function generateTips(type, tone) {
+            const tips = {
+                terror: {
+                    sombrio: "- Use iluminação baixa para criar atmosfera\n- Sons ambientes de vento e rangidos\n- Transições rápidas entre cenas\n- Expressões faciais exageradas para impacto",
+                    misterioso: "- Iluminação contrastante (claro/escuro)\n- Sons sutis e suspense musical\n- Revelações graduais\n- Manter algum mistério até o final"
+                },
+                romance: {
+                    dramatico: "- Luz suave e cores quentes\n- Música emocional de fundo\n- Close nos olhos para mostrar emoção\n- Ritmo mais lento para dramaticidade",
+                    leve: "- Cenários coloridos e iluminados\n- Música alegre e otimista\n- Sorrisos genuínos\n- Transições suaves e fluidas"
+                },
+                comedia: {
+                    leve: "- Iluminação clara e cores vibrantes\n- Sons engraçados e música divertida\n- Expressões faciais exageradas\n- Edição rápida com cortes precisos",
+                    dramatico: "- Contraste entre situação séria e cômica\n- Timing perfeito para as piadas\n- Reações inesperadas dos personagens\n- Quebra de expectativa"
+                }
+            };
+            
+            return tips[type] && tips[type][tone] 
+                ? tips[type][tone] 
+                : "- Use iluminação adequada ao gênero\n- Música de fundo condizente\n- Expressões faciais apropriadas\n- Transições que reforcem a narrativa";
+        }
+        
+        // Copiar roteiro
+        copyBtn.addEventListener('click', () => {
+            const textArea = document.createElement('textarea');
+            textArea.value = scriptContent.textContent;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            
+            // Feedback visual
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = 'Copiado!';
+            setTimeout(() => {
+                copyBtn.textContent = originalText;
+            }, 2000);
+        });
+        
+        // Modal de pagamento
+        openPaymentModalBtn.addEventListener('click', () => {
+            paymentModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Previne scroll do body
+        });
+        
+        closeModalBtn.addEventListener('click', () => {
+            paymentModal.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Restaura scroll do body
+            resetPaymentSelection();
+        });
+        
+        // Fechar modal ao clicar fora
+        paymentModal.addEventListener('click', (e) => {
+            if (e.target === paymentModal) {
+                paymentModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                resetPaymentSelection();
+            }
+        });
+        
+        // Selecionar método de pagamento
+        paymentOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                // Remover seleção anterior
+                paymentOptions.forEach(opt => opt.classList.remove('selected'));
+                
+                // Selecionar nova opção
+                option.classList.add('selected');
+                selectedPaymentMethod = option.dataset.method;
+                
+                // Mostrar detalhes do pagamento
+                showPaymentDetails(selectedPaymentMethod);
+            });
+        });
+        
+        function showPaymentDetails(method) {
+            let detailsHTML = '';
+            
+            switch(method) {
+                case 'credit':
+                    detailsHTML = `
+                        <h4>Cartão de Crédito</h4>
+                        <div class="form-group">
+                            <label for="cardNumber">Número do Cartão</label>
+                            <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456">
+                        </div>
+                        <div style="display: flex; gap: 15px;">
+                            <div class="form-group" style="flex: 1;">
+                                <label for="cardExpiry">Validade</label>
+                                <input type="text" id="cardExpiry" placeholder="MM/AA">
+                            </div>
+                            <div class="form-group" style="flex: 1;">
+                                <label for="cardCVC">CVC</label>
+                                <input type="text" id="cardCVC" placeholder="123">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="cardName">Nome no Cartão</label>
+                            <input type="text" id="cardName" placeholder="Seu nome completo">
+                        </div>
+                        <div class="form-group">
+                            <label for="installments">Parcelas</label>
+                            <select id="installments">
+                                <option value="1">1x de R$ 35,00</option>
+                                <option value="2">2x de R$ 17,50</option>
+                                <option value="3">3x de R$ 11,67</option>
+                                <option value="4">4x de R$ 8,75</option>
+                                <option value="5">5x de R$ 7,00</option>
+                                <option value="6">6x de R$ 5,83</option>
+                            </select>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'debit':
+                    detailsHTML = `
+                        <h4>Cartão de Débito</h4>
+                        <div class="form-group">
+                            <label for="debitCardNumber">Número do Cartão</label>
+                            <input type="text" id="debitCardNumber" placeholder="1234 5678 9012 3456">
+                        </div>
+                        <div style="display: flex; gap: 15px;">
+                            <div class="form-group" style="flex: 1;">
+                                <label for="debitCardExpiry">Validade</label>
+                                <input type="text" id="debitCardExpiry" placeholder="MM/AA">
+                            </div>
+                            <div class="form-group" style="flex: 1;">
+                                <label for="debitCardCVC">CVC</label>
+                                <input type="text" id="debitCardCVC" placeholder="123">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="debitCardName">Nome no Cartão</label>
+                            <input type="text" id="debitCardName" placeholder="Seu nome completo">
+                        </div>
+                    `;
+                    break;
+                    
+                case 'pix':
+                    detailsHTML = `
+                        <h4>PIX</h4>
+                        <p>Para finalizar sua compra via PIX:</p>
+                        <ol>
+                            <li>Clique em "Finalizar Pagamento"</li>
+                            <li>Você será redirecionado para o WhatsApp</li>
+                            <li>Envie a mensagem pré-preparada</li>
+                            <li>Receba a chave PIX para pagamento</li>
+                        </ol>
+                        <p><strong>Pagamento instantâneo e 100% seguro</strong></p>
+                    `;
+                    break;
+                    
+                case 'boleto':
+                    detailsHTML = `
+                        <h4>Boleto Bancário</h4>
+                        <p>Para finalizar sua compra via Boleto:</p>
+                        <ol>
+                            <li>Clique em "Finalizar Pagamento"</li>
+                            <li>Você será redirecionado para o WhatsApp</li>
+                            <li>Envie a mensagem pré-preparada</li>
+                            <li>Receba o boleto para pagamento</li>
+                        </ol>
+                        <p><strong>O boleto tem validade de 3 dias úteis</strong></p>
+                    `;
+                    break;
+            }
+            
+            paymentDetails.innerHTML = detailsHTML;
+            paymentDetails.classList.add('active');
+        }
+        
+        function resetPaymentSelection() {
+            paymentOptions.forEach(opt => opt.classList.remove('selected'));
+            paymentDetails.classList.remove('active');
+            selectedPaymentMethod = '';
+        }
+        
+        // Finalizar pagamento
+        confirmPaymentBtn.addEventListener('click', () => {
+            if (!selectedPaymentMethod) {
+                alert('Por favor, selecione um método de pagamento.');
+                return;
+            }
+            
+            // Redirecionar para WhatsApp com mensagem personalizada
+            const message = `Olá! Gostaria de adquirir o plano Premium do @histórias_dark. Método de pagamento selecionado: ${getPaymentMethodName(selectedPaymentMethod)}`;
+            const whatsappURL = `https://wa.me/5551989166847?text=${encodeURIComponent(message)}`;
+            
+            window.open(whatsappURL, '_blank');
+            
+            // Fechar modal
+            paymentModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            resetPaymentSelection();
+            
+            // Mensagem de confirmação
+            alert('Você será redirecionado para o WhatsApp para finalizar sua compra. Obrigado!');
+        });
+        
+        function getPaymentMethodName(method) {
+            const names = {
+                'credit': 'Cartão de Crédito',
+                'debit': 'Cartão de Débito',
+                'pix': 'PIX',
+                'boleto': 'Boleto Bancário'
+            };
+            
+            return names[method] || 'Método de Pagamento';
+        }
+    </script>
+</body>
+</html>
